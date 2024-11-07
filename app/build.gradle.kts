@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.play.services)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -37,9 +40,22 @@ android {
     buildFeatures {
         compose = true
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
+
+    //Dagger Hilt
+    implementation(libs.dagger.hilt)
+    kapt(libs.dagger.hilt.compiler)
+
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.remoteconfig.ktx)
+    implementation(libs.firebase.analytics.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
